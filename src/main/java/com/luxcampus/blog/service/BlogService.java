@@ -12,6 +12,8 @@ public interface BlogService {
 
 	List<Post> findPostsByTitle(String title);
 
+	List<Post> getPostsSortedByTitle(String title);
+
 	void addPost(Post post);
 
 	void editPostById(Integer id, Post post);

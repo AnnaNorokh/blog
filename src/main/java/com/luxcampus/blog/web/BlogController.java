@@ -23,8 +23,7 @@ public class BlogController {
 
     @GetMapping
     public List<Post> getAllPosts(){
-        List<Post> posts = blogServiceImpl.getAllPosts();
-        return posts;
+        return blogServiceImpl.getAllPosts();
     }
 
     @GetMapping(path = "/{id}")
@@ -37,9 +36,13 @@ public class BlogController {
         return blogServiceImpl.findPostsByTitle(title);
     }
 
+    @GetMapping(params = {"sort"})
+    public List<Post> getPostsSortedByTitle(@RequestParam(value = "sort", required = false) String title){
+        return blogServiceImpl.getPostsSortedByTitle(title);
+    }
+
     @PostMapping
     public void addPost(@RequestBody Post post){
-        logger.info("Posted");
         blogServiceImpl.addPost(post);
     }
 
@@ -51,7 +54,6 @@ public class BlogController {
 
     @DeleteMapping(path = "/{id}")
     public void deletePostById(@PathVariable("id") Integer id){
-        logger.info("Deleted");
         blogServiceImpl.deletePostById(id);
     }
 

@@ -3,6 +3,7 @@ package com.luxcampus.blog.service;
 import com.luxcampus.blog.entity.Post;
 import com.luxcampus.blog.repository.BlogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,6 +31,11 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public  List<Post> findPostsByTitle(String title){
         return blogRepository.findPostsByTitle(title);
+    }
+
+    @Override
+    public List<Post> getPostsSortedByTitle(String title){
+        return blogRepository.findAll(Sort.by(Sort.Direction.ASC, title));
     }
 
     @Override

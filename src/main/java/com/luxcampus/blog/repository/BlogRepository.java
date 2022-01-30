@@ -13,5 +13,5 @@ public interface BlogRepository extends JpaRepository<Post, Integer> {
 
 	List<Post> findPostsByTitle(String title);
 
-
+	List<Post> getPostsSortedByTitle(String title);
 }
