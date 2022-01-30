@@ -12,7 +12,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping(path = "/blog")
+@RequestMapping(path = "/blog/posts")
 @Slf4j
 public class BlogController {
 
@@ -21,15 +21,20 @@ public class BlogController {
     @Autowired
     private BlogServiceImpl blogServiceImpl;
 
-    @GetMapping("/posts")
+    @GetMapping
     public List<Post> getAllPosts(){
         List<Post> posts = blogServiceImpl.getAllPosts();
         return posts;
     }
 
-    @GetMapping(path = "/posts/{id}")
+    @GetMapping(path = "/{id}")
     public Post findPostById(@PathVariable("id") Integer id){
         return blogServiceImpl.findPostById(id);
+    }
+
+    @GetMapping(params = {"title"})
+    public  List<Post> findPostByTitle(@RequestParam("title") String title){
+        return blogServiceImpl.findPostsByTitle(title);
     }
 
     @PostMapping
@@ -38,13 +43,13 @@ public class BlogController {
         blogServiceImpl.addPost(post);
     }
 
-    @PutMapping(path = "/posts/{id}")
+    @PutMapping(path = "/{id}")
     public void editPostById(@PathVariable("id") Integer id,
                              @RequestBody Post post){
         blogServiceImpl.editPostById(id, post);
     }
 
-    @DeleteMapping(path = "/posts/{id}")
+    @DeleteMapping(path = "/{id}")
     public void deletePostById(@PathVariable("id") Integer id){
         logger.info("Deleted");
         blogServiceImpl.deletePostById(id);

@@ -6,14 +6,16 @@ import java.util.List;
 
 public interface BlogService {
 
-    public List<Post> getAllPosts();
+	List<Post> getAllPosts();
 
-    public Post findPostById(Integer id);
+	Post findPostById(Integer id);
 
-    public void addPost(Post post);
+	List<Post> findPostsByTitle(String title);
 
-    public void editPostById(Integer id, Post post);
+	void addPost(Post post);
 
-    public void deletePostById(Integer id);
+	void editPostById(Integer id, Post post);
+
+	void deletePostById(Integer id);
 
 }

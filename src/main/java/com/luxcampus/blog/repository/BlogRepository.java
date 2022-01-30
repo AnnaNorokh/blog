@@ -11,4 +11,7 @@ import java.util.Optional;
 @Repository
 public interface BlogRepository extends JpaRepository<Post, Integer> {
 
+	List<Post> findPostsByTitle(String title);
+
+
 }

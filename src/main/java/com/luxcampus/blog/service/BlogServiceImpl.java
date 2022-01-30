@@ -28,6 +28,11 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
+    public  List<Post> findPostsByTitle(String title){
+        return blogRepository.findPostsByTitle(title);
+    }
+
+    @Override
     public void addPost (Post post){
         blogRepository.save(post);
     }
@@ -38,6 +43,9 @@ public class BlogServiceImpl implements BlogService {
             throw new IllegalStateException();
         }
         Post newPost = blogRepository.findById(id).get();
+
+        newPost.setTitle(post.getTitle());
+        newPost.setContent(post.getContent());
 
         blogRepository.save(newPost);
     }
