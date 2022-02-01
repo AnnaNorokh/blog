@@ -20,4 +20,10 @@ public interface BlogService {
 
 	void deletePostById(Integer id);
 
+	void addStar(Integer id);
+
+	void removeStar(Integer id);
+
+	List<Post> getAllStarPosts();
+
 }

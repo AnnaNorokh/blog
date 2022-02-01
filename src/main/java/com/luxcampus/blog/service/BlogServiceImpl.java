@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 
 @Service
 public class BlogServiceImpl implements BlogService {
@@ -63,6 +65,37 @@ public class BlogServiceImpl implements BlogService {
             throw new IllegalStateException();
         }
         blogRepository.deleteById(id);
+    }
+
+    @Override
+    public void addStar(Integer id){
+        Post newPost = blogRepository.findById(id).get();
+        newPost.setStar(true);
+
+        blogRepository.save(newPost);
+    }
+
+    @Override
+    public void removeStar(Integer id){
+        Post newPost = blogRepository.findById(id).get();
+        newPost.setStar(false);
+
+        blogRepository.save(newPost);
+    }
+
+    @Override
+    public  List<Post> getAllStarPosts(){
+        List<Post> posts = blogRepository.findAll();
+        List<Post> starPosts = new LinkedList<>();
+
+        for (int i = 0; i < posts.size(); i++) {
+            Post post = posts.get(i);
+            if(post.isStar()){
+                starPosts.add(post);
+            }
+        }
+
+       return starPosts;
     }
 
 }

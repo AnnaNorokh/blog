@@ -57,6 +57,22 @@ public class BlogController {
         blogServiceImpl.deletePostById(id);
     }
 
+    @GetMapping(path = "/star")
+    public List<Post> getAllStarPosts(){
+        return blogServiceImpl.getAllStarPosts();
+    }
+
+    @PutMapping(path = "/star/{id}")
+    public void addStar(@PathVariable("id") Integer id){
+        blogServiceImpl.addStar(id);
+    }
+
+    @DeleteMapping(path = "/star/{id}")
+    public void removeStar(@PathVariable("id") Integer id){
+        blogServiceImpl.removeStar(id);
+    }
+
+
 
 }
 

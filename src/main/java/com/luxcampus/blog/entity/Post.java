@@ -23,6 +23,9 @@ public class Post {
     @Column
     private String content;
 
+    @Column
+    private boolean star;
+
 
 }
 

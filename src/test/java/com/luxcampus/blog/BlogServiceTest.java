@@ -4,7 +4,7 @@ import com.luxcampus.blog.entity.Post;
 import com.luxcampus.blog.service.BlogServiceImpl;
 import com.luxcampus.blog.web.BlogController;
 import org.hamcrest.Matchers;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -27,10 +27,22 @@ public class BlogServiceTest {
     @Autowired
     private MockMvc mockMvc;
 
+    private Post post;
+
+    @BeforeEach
+    void createTestPost() {
+        post = Post.builder()
+                .id(1)
+                .title("cat")
+                .content("meow meow meow")
+                .star(false)
+                .build();
+    }
+
     @Test
     public void getAllPostsTest () throws Exception {
         when(blogServiceImpl.getAllPosts())
-                .thenReturn(List.of(new Post(1, "cat", "meow meow meow")));
+                .thenReturn(List.of(post));
 
         this.mockMvc
                 .perform(MockMvcRequestBuilders
@@ -46,7 +58,7 @@ public class BlogServiceTest {
     @Test
     public void findPostByIdTest () throws Exception {
         when(blogServiceImpl.findPostById(1))
-                .thenReturn(new Post(1, "cat", "meow meow meow"));
+                .thenReturn(post);
 
         this.mockMvc
                 .perform(MockMvcRequestBuilders
@@ -59,7 +71,7 @@ public class BlogServiceTest {
     @Test
     public void findPostsByTitle() throws Exception {
         when(blogServiceImpl.findPostsByTitle("cat"))
-                .thenReturn(List.of(new Post(1, "cat", "meow meow meow")));
+                .thenReturn(List.of(post));
 
         this.mockMvc
                 .perform(MockMvcRequestBuilders
@@ -72,7 +84,7 @@ public class BlogServiceTest {
 
     @Test
     public void addPostTest () throws Exception {
-        doNothing().when(blogServiceImpl).addPost(new Post(1, "cat", "meow meow meow"));
+        doNothing().when(blogServiceImpl).addPost(post);
 
         this.mockMvc
                 .perform(MockMvcRequestBuilders
@@ -85,7 +97,7 @@ public class BlogServiceTest {
 
     @Test
     public void editPostByIdTest () throws Exception {
-        doNothing().when(blogServiceImpl).editPostById(1,new Post(1, "cat", "meow meow meow"));
+        doNothing().when(blogServiceImpl).editPostById(1,post);
 
         this.mockMvc
                 .perform(MockMvcRequestBuilders
