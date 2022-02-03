@@ -1,5 +1,6 @@
 package com.luxcampus.blog.service;
 
+import com.luxcampus.blog.entity.Comment;
 import com.luxcampus.blog.entity.Post;
 
 import java.util.List;
@@ -25,5 +26,11 @@ public interface BlogService {
 	void removeStar(Integer id);
 
 	List<Post> getAllStarPosts();
+
+	void addComment(Comment comment);
+
+	Post getCommentById(Integer commentId);
+
+	List<Post> getCommentsByPostId(Integer postId);
 
 }
