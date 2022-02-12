@@ -25,8 +25,9 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.AUTO )
     private Date creationDate;
 
-    @Column
-    //@ManyToOne(optional = false, cascade = CascadeType.ALL)
-    private Integer postId;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id")
+    private Post post;
+
 
 }

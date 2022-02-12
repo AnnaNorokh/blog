@@ -27,10 +27,4 @@ public interface BlogService {
 
 	List<Post> getAllStarPosts();
 
-	void addComment(Comment comment);
-
-	Post getCommentById(Integer commentId);
-
-	List<Post> getCommentsByPostId(Integer postId);
-
 }

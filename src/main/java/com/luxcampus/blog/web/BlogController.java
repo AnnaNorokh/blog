@@ -73,20 +73,6 @@ public class BlogController {
         blogServiceImpl.removeStar(id);
     }
 
-    @PostMapping
-    public void addComment(@RequestBody Comment comment){
-        blogServiceImpl.addComment(comment);
-    }
-
-    @GetMapping(path = "/{commentId}/comments")
-    public Post getCommentById(@PathVariable("commentId") Integer commentId){
-        return blogServiceImpl.getCommentById(commentId);
-    }
-
-    @GetMapping(params = "{postId}/comments/{commentId}")
-    public  List<Post> getCommentByPostId(@PathVariable("postId") Integer postId, @PathVariable("commentId") Integer commentId){
-        return blogServiceImpl.getCommentsByPostId(postId);
-    }
 
 }
 
