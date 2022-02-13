@@ -1,15 +1,17 @@
 package com.luxcampus.blog.service;
 
+import com.luxcampus.blog.dto.CommentDTO;
 import com.luxcampus.blog.entity.Comment;
-import com.luxcampus.blog.entity.Post;
 
 import java.util.List;
 
 public interface CommentService {
 
-    void addComment(Comment comment);
+    void addComment(CommentDTO comment);
 
-    Comment getCommentById(Integer commentId);
+    CommentDTO getCommentById(Integer commentId);
 
-    List<Comment> getCommentsByPostId(Integer postId);
+    List<CommentDTO> getCommentsByPostId(Integer postId);
+
+    List<CommentDTO> getAllComments();
 }

@@ -3,6 +3,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.UUID;
 
 @ToString
 @Getter
@@ -25,8 +26,8 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.AUTO )
     private Date creationDate;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "postId")
     private Post post;
 
 

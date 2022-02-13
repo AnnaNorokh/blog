@@ -1,13 +1,14 @@
 package com.luxcampus.blog.service;
 
-import com.luxcampus.blog.entity.Comment;
+import com.luxcampus.blog.dto.PostDTO;
+import com.luxcampus.blog.dto.mappers.PostMapper;
 import com.luxcampus.blog.entity.Post;
 import com.luxcampus.blog.repository.BlogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -16,18 +17,29 @@ public class BlogServiceImpl implements BlogService {
     @Autowired
     private final BlogRepository blogRepository;
 
-    public BlogServiceImpl(BlogRepository blogRepository) {
+    @Autowired
+    private final PostMapper postMapper;
+
+    public BlogServiceImpl(BlogRepository blogRepository, PostMapper postMapper) {
         this.blogRepository = blogRepository;
+        this.postMapper = postMapper;
     }
 
     @Override
-    public List<Post> getAllPosts(){
-        return blogRepository.findAll();
+    public List<PostDTO> getAllPosts(){
+        ArrayList<PostDTO> postDTO = new ArrayList<>();
+        List<Post> posts = blogRepository.findAll();
+
+        for(int i=0; i<posts.size(); i++){
+            postDTO.add(postMapper.PostToPostDTO(posts.get(i)));
+        }
+
+        return postDTO;
     }
 
     @Override
-    public Post findPostById(Integer id){
-        return blogRepository.findById(id).get();
+    public PostDTO findPostById(Integer id){
+        return postMapper.PostToPostDTO(blogRepository.findById(id).get());
     }
 
     @Override
@@ -41,12 +53,12 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public void addPost (Post post){
-        blogRepository.save(post);
+    public void addPost (PostDTO post){
+        blogRepository.save(postMapper.PostDTOToPost(post));
     }
 
     @Override
-    public void editPostById (Integer id, Post post){
+    public void editPostById (Integer id, PostDTO post){
         if(!blogRepository.existsById(id)){
             throw new IllegalStateException();
         }
@@ -84,14 +96,13 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public  List<Post> getAllStarPosts(){
+    public List<PostDTO> getAllStarPosts(){
         List<Post> posts = blogRepository.findAll();
-        List<Post> starPosts = new LinkedList<>();
+        List<PostDTO> starPosts = new ArrayList<>();
 
-        for (int i = 0; i < posts.size(); i++) {
-            Post post = posts.get(i);
-            if(post.isStar()){
-                starPosts.add(post);
+        for (Post post : posts) {
+            if (post.isStar()) {
+                starPosts.add(postMapper.PostToPostDTO(post));
             }
         }
 

@@ -1,5 +1,6 @@
 package com.luxcampus.blog.web;
 
+import com.luxcampus.blog.dto.PostDTO;
 import com.luxcampus.blog.entity.Comment;
 import com.luxcampus.blog.entity.Post;
 import com.luxcampus.blog.service.BlogServiceImpl;
@@ -23,12 +24,12 @@ public class BlogController {
     private BlogServiceImpl blogServiceImpl;
 
     @GetMapping
-    public List<Post> getAllPosts(){
+    public List<PostDTO> getAllPosts(){
         return blogServiceImpl.getAllPosts();
     }
 
     @GetMapping(path = "/{id}")
-    public Post findPostById(@PathVariable("id") Integer id){
+    public PostDTO findPostById(@PathVariable("id") Integer id){
         return blogServiceImpl.findPostById(id);
     }
 
@@ -43,13 +44,13 @@ public class BlogController {
     }
 
     @PostMapping
-    public void addPost(@RequestBody Post post){
+    public void addPost(@RequestBody PostDTO post){
         blogServiceImpl.addPost(post);
     }
 
     @PutMapping(path = "/{id}")
     public void editPostById(@PathVariable("id") Integer id,
-                             @RequestBody Post post){
+                             @RequestBody PostDTO post){
         blogServiceImpl.editPostById(id, post);
     }
 
@@ -59,7 +60,7 @@ public class BlogController {
     }
 
     @GetMapping(path = "/star")
-    public List<Post> getAllStarPosts(){
+    public List<PostDTO> getAllStarPosts(){
         return blogServiceImpl.getAllStarPosts();
     }
 
