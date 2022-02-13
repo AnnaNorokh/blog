@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/blog/comments")
+@RequestMapping(path = "/blog/posts")
 @Slf4j
 public class CommentController {
 
     @Autowired
     private CommentServiceImpl commentServiceImpl;
 
-    @PostMapping
+    @PostMapping(path = "/comments")
     public void addComment(@RequestBody Comment comment){
         commentServiceImpl.addComment(comment);
 }

@@ -1,4 +1,4 @@
-package com.luxcampus.blog;
+package com.luxcampus.blog.service;
 
 import com.luxcampus.blog.entity.Post;
 import com.luxcampus.blog.service.BlogServiceImpl;
