@@ -38,7 +38,7 @@ public class CommentServiceImpl implements CommentService{
     public List<CommentDTO> getCommentsByPostId(Integer postId){
         List<Comment> comments = commentRepository.findAll();
         List<CommentDTO> commentDTOS = new ArrayList<>();
-        for(int i =0; i<comments.size()-1; i++){
+        for(int i = 0; i<comments.size() - 1; i++){
             commentDTOS.add(commentMapper.CommentToCommentDTO(comments.get(i)));
         }
 

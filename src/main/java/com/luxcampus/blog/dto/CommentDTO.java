@@ -17,6 +17,6 @@ import java.util.UUID;
 public class CommentDTO {
     private Integer commentId;
     private String text;
-    private Integer post;
+    private Integer postId;
     private Date creationDate;
 }

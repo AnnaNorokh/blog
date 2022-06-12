@@ -18,13 +18,15 @@ public class PostMapper {
 
     public PostDTO PostToPostDTO(Post post){
         PostDTO postDTO = new PostDTO();
+        ArrayList<Integer> comments = new ArrayList<>();
         postDTO.setPostId(post.getId());
         postDTO.setContent(post.getContent());
         postDTO.setStar(post.isStar());
         postDTO.setTitle(post.getTitle());
-        for(int i=0; i<post.getComments().size()-1; i++){
-            postDTO.setComments(Collections.singletonList(post.getComments().get(i).getCommentId()));
+        for(int i=0; i<post.getComments().size(); i++){
+            comments.add(post.getComments().get(i).getCommentId());
         }
+        postDTO.setComments(comments);
         return postDTO;
     }
 

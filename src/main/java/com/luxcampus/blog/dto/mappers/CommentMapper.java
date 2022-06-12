@@ -16,14 +16,16 @@ public class CommentMapper {
 
     public Comment CommentDTOtoComment(CommentDTO commentDTO){
         Comment comment = new Comment();
-        comment.setPost(blogRepository.getById(commentDTO.getPost()));
+        comment.setCommentId(commentDTO.getCommentId());
+        comment.setCreationDate(commentDTO.getCreationDate());
+        comment.setPost(blogRepository.getById(commentDTO.getPostId()));
         comment.setText(commentDTO.getText());
         return comment;
     }
 
     public CommentDTO CommentToCommentDTO(Comment comment){
         CommentDTO commentDTO = new CommentDTO();
-        commentDTO.setPost(comment.getPost().getId());
+        commentDTO.setPostId(comment.getPost().getId());
         commentDTO.setCommentId(comment.getCommentId());
         commentDTO.setCreationDate(comment.getCreationDate());
         commentDTO.setText(comment.getText());
