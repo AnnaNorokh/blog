@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class CommentServiceImpl implements CommentService{
@@ -35,25 +36,39 @@ public class CommentServiceImpl implements CommentService{
     }
 
     @Override
-    public List<CommentDTO> getCommentsByPostId(Integer postId){
+    public CommentDTO getCommentByPostId(Integer postId, Integer commentId){
         List<Comment> comments = commentRepository.findAll();
-        List<CommentDTO> commentDTOS = new ArrayList<>();
-        for(int i = 0; i<comments.size() - 1; i++){
-            commentDTOS.add(commentMapper.CommentToCommentDTO(comments.get(i)));
+        for(int i = 0; i < comments.size(); i++) {
+            if (Objects.equals(comments.get(i).getPost().getId(), postId)
+                    && Objects.equals(comments.get(i).getCommentId(), commentId)) {
+                return commentMapper.CommentToCommentDTO(comments.get(i));
+            }
         }
 
-        return commentDTOS;
+        return null;
+    }
+
+    @Override
+    public List<CommentDTO> getCommentsByPostId(Integer postId){
+        List<Comment> comments = commentRepository.findAll();
+        List<CommentDTO> commentsDTO = new ArrayList<>();
+
+        for(int i = 0; i < comments.size(); i++){
+            if(Objects.equals(comments.get(i).getPost().getId(), postId))
+                commentsDTO.add(commentMapper.CommentToCommentDTO(comments.get(i)));
+        }
+        return commentsDTO;
     }
 
     @Override
     public List<CommentDTO> getAllComments(){
         List<Comment> comments = commentRepository.findAll();
-        List<CommentDTO> commentDTOS = new ArrayList<>();
+        List<CommentDTO> commentsDTO = new ArrayList<>();
 
-        for(int i=0; i<comments.size(); i++){
-            commentDTOS.add(commentMapper.CommentToCommentDTO(comments.get(i)));
+        for(int i = 0; i < comments.size(); i++){
+            commentsDTO.add(commentMapper.CommentToCommentDTO(comments.get(i)));
         }
-       return commentDTOS;
+       return commentsDTO;
     }
 
 }

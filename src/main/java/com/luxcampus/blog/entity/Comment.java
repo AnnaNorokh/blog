@@ -22,6 +22,7 @@ public class Comment {
     @Column
     private String text;
 
+    //TODO Fix creation date
     @Column
     @GeneratedValue(strategy = GenerationType.AUTO )
     private Date creationDate;

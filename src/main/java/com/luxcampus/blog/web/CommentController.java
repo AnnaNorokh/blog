@@ -25,7 +25,7 @@ public class CommentController {
         commentServiceImpl.addComment(comment);
 }
 
-    @GetMapping(path = "/{commentId}/comments")
+    @GetMapping(path = "/comments/{commentId}")
     public CommentDTO getCommentById(@PathVariable("commentId") Integer commentId){
         return commentServiceImpl.getCommentById(commentId);
     }
@@ -35,9 +35,15 @@ public class CommentController {
         return commentServiceImpl.getAllComments();
     }
 
-    @GetMapping(params = "{postId}/comments/{commentId}")
-    public List<CommentDTO> getCommentByPostId(@PathVariable("postId") Integer postId,
-                                            @PathVariable("commentId") Integer commentId){
+    @GetMapping(path = "/{postId}/comments")
+    public List<CommentDTO> getCommentsByPostId(@PathVariable("postId") Integer postId){
         return commentServiceImpl.getCommentsByPostId(postId);
     }
+
+    @GetMapping(path = "/{postId}/comment/{commentId}")
+    public CommentDTO getCommentByPostId(@PathVariable("postId") Integer postId,
+                                         @PathVariable("commentId") Integer commentId){
+        return commentServiceImpl.getCommentByPostId(postId, commentId);
+    }
+
 }

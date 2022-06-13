@@ -13,5 +13,7 @@ public interface CommentService {
 
     List<CommentDTO> getCommentsByPostId(Integer postId);
 
+    CommentDTO getCommentByPostId(Integer postId, Integer commentId);
+
     List<CommentDTO> getAllComments();
 }
