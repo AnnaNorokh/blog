@@ -14,6 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @Component
 public class PostDTO {
+
     Integer postId;
     String title;
     String content;

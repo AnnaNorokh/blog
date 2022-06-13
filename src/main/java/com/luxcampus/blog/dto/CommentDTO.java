@@ -15,6 +15,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CommentDTO {
+
     private Integer commentId;
     private String text;
     private Integer postId;

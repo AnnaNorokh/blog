@@ -52,11 +52,11 @@ public class CommentServiceImpl implements CommentService{
     public List<CommentDTO> getCommentsByPostId(Integer postId){
         List<Comment> comments = commentRepository.findAll();
         List<CommentDTO> commentsDTO = new ArrayList<>();
-
         for(int i = 0; i < comments.size(); i++){
             if(Objects.equals(comments.get(i).getPost().getId(), postId))
                 commentsDTO.add(commentMapper.CommentToCommentDTO(comments.get(i)));
         }
+
         return commentsDTO;
     }
 
@@ -64,10 +64,10 @@ public class CommentServiceImpl implements CommentService{
     public List<CommentDTO> getAllComments(){
         List<Comment> comments = commentRepository.findAll();
         List<CommentDTO> commentsDTO = new ArrayList<>();
-
         for(int i = 0; i < comments.size(); i++){
             commentsDTO.add(commentMapper.CommentToCommentDTO(comments.get(i)));
         }
+
        return commentsDTO;
     }
 

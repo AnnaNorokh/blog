@@ -1,5 +1,6 @@
 package com.luxcampus.blog.web;
 
+import com.luxcampus.blog.dto.FullPostDTO;
 import com.luxcampus.blog.dto.PostDTO;
 import com.luxcampus.blog.entity.Comment;
 import com.luxcampus.blog.entity.Post;
@@ -74,6 +75,10 @@ public class BlogController {
         blogServiceImpl.removeStar(id);
     }
 
+    @GetMapping(path = "/{id}/full")
+    public FullPostDTO getFullPostById(@PathVariable("id") Integer id) {
+        return blogServiceImpl.getFullPostById(id);
+    }
 
 }
 

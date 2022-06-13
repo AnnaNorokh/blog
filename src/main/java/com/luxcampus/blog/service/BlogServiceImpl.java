@@ -1,5 +1,6 @@
 package com.luxcampus.blog.service;
 
+import com.luxcampus.blog.dto.FullPostDTO;
 import com.luxcampus.blog.dto.PostDTO;
 import com.luxcampus.blog.dto.mappers.PostMapper;
 import com.luxcampus.blog.entity.Post;
@@ -109,8 +110,10 @@ public class BlogServiceImpl implements BlogService {
        return starPosts;
     }
 
-
-
+    @Override
+    public FullPostDTO getFullPostById(Integer id) {
+        return postMapper.PostToFullPostDTO(blogRepository.findById(id).get());
+    }
 
 }
 

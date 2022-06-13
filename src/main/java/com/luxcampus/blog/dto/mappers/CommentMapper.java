@@ -10,8 +10,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class CommentMapper {
     @Autowired
-    BlogService blogService;
-    @Autowired
     BlogRepository blogRepository;
 
     public Comment CommentDTOtoComment(CommentDTO commentDTO){

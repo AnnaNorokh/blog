@@ -1,5 +1,6 @@
 package com.luxcampus.blog.service;
 
+import com.luxcampus.blog.dto.FullPostDTO;
 import com.luxcampus.blog.dto.PostDTO;
 import com.luxcampus.blog.entity.Post;
 
@@ -27,4 +28,5 @@ public interface BlogService {
 
 	List<PostDTO> getAllStarPosts();
 
+	FullPostDTO getFullPostById(Integer id);
 }
